@@ -1,5 +1,6 @@
 from multiprocessing import context
 from rest_framework.response import Response
+from inmuebleslist_app.api.pagination import EdificacionLOPagination, EdificacionPagination
 from inmuebleslist_app.models import Edificacion, Empresa, Comentario
 from inmuebleslist_app.api.serializers import ComentarioSerializer, EmpresaSerializer, EdificacionSerializer
 #from rest_framework.decorators import api_view
@@ -196,6 +197,7 @@ class EdificacionList(generics.ListAPIView):
     serializer_class = EdificacionSerializer
     filter_backends = [filters.SearchFilter, filters.OrderingFilter]
     search_fields = ['direccion', 'empresa__nombre']
+    pagination_class = EdificacionPagination  #EdificacionLOPagination
 
 class EdificacionAV(APIView):
     permission_classes = [IsAdminOrReadOnly]
